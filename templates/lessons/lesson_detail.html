@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>{{ lesson.title }}</h1>
+  {% if lesson.thumbnail %}
+    <img src="{{ lesson.thumbnail.url }}" alt="{{ lesson.title }} thumbnail" />
+  {% endif %}
+  <p>{{ lesson.content|safe }}</p>
+
+  {% if user in lesson.course.students.all %}
+    {% if progress.completed %}
+      <p>You completed this lesson on {{ progress.completed_at|date:'F d, Y, h:i:s A' }}</p>
+    {% else %}
+      <form method="post" action="{% url 'mark_lesson_complete' lesson.course.pk lesson.pk %}">
+        {% csrf_token %}
+        <button type="submit">Mark as Completed</button>
+      </form>
+    {% endif %}
+
+    {% if course_completed %}
+      <p>You completed this course on {{ course_completed_at|date:'F d, Y, h:i:s A' }}</p>
+    {% endif %}
+  {% endif %}
+
+  <a href="{% url 'course_detail' lesson.course.pk %}">Back to Course</a>
+{% endblock %}

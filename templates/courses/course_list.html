@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Courses</h1>
+  {% for course in courses %}
+    <div>
+      {% if course.thumbnail %}
+        <img src="{{ course.thumbnail.url }}" alt="{{ course.title }}" style="max-width: 200px;" />
+      {% endif %}
+      <h2><a href="{% url 'course_detail' course.pk %}">{{ course.title }}</a></h2>
+      <p>{{ course.description }}</p>
+      <p>Instructor: {{ course.instructor.username }}</p>
+    </div>
+  {% endfor %}
+{% endblock %}
