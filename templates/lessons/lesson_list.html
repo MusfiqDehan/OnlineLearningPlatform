@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>{{ course.title }} - Lessons</h1>
+  {% if user == course.instructor %}
+    <a href="{% url 'lesson_create' course.pk %}">Add New Lesson</a>
+  {% endif %}
+  <ul>
+    {% for lesson in lessons %}
+      <li>
+        <a href="{% url 'lesson_detail' course.pk lesson.pk %}">{{ lesson.title }}</a>
+        {% if user == course.instructor %}
+          <a href="{% url 'lesson_update' course.pk lesson.pk %}">Edit</a>
+          <a href="{% url 'lesson_delete' course.pk lesson.pk %}">Delete</a>
+        {% endif %}
+      </li>
+    {% empty %}
+      <li>No lessons available for this course.</li>
+    {% endfor %}
+  </ul>
+  <a href="{% url 'course_detail' course.pk %}">Back to Course</a>
+{% endblock %}
