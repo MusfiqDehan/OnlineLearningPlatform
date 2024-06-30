@@ -2,18 +2,33 @@
 
 {% block content %}
   <h2>Log In</h2>
-  <form method="post">
+  {% comment %} <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
     <button type="submit">Log In</button>
+  </form> {% endcomment %}
+
+  <form class="my-3" method="post" action="{% url 'login' %}">
+    {% csrf_token %}
+
+    <div class="mb-3">
+      <label for="username" class="form-label">Username</label>
+      <input type="text" class="form-control" name="username" id="username" aria-describedby="username" />
+    </div>
+
+    <div class="mb-3">
+      <label for="password1" class="form-label">Password</label>
+      <input type="password" class="form-control" name="password1" id="password1" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
   </form>
   <p>Don't have an account?</p>
-  <ul>
-    <li>
-      <a href="{% url 'student_signup' %}">Sign up as a student</a>
-    </li>
-    <li>
-      <a href="{% url 'instructor_signup' %}">Sign up as an instructor</a>
-    </li>
-  </ul>
+
+  <p>
+    <a class="text-decoration-none" href="{% url 'student_signup' %}">Sign up as a Student</a>
+  </p>
+  <p>
+    <a class="text-decoration-none" href="{% url 'instructor_signup' %}">Sign up as an Instructor</a>
+  </p>
 {% endblock %}

@@ -40,9 +40,9 @@
 
 <body>
     <header>
-        <nav class="navbar navbar-expand-lg fixed-top bg-primary">
+        <nav class="navbar navbar-expand-lg fixed-top top-0 bg-primary">
             <div class="container">
-                <a class="navbar-brand logo fs-2 text-white" href="#">Online Learning Platform</a>
+                <a class="navbar-brand logo fs-3 text-white" href="{% url 'course_list' %}">Online Learning Platform</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
@@ -51,34 +51,34 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link fs-4 text-white" aria-current="page"
+                            <a class="nav-link fs-5 text-white" aria-current="page"
                                 href="{% url 'course_list' %}">Courses</a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link fs-4 text-white" aria-current="page"
+                            <a class="nav-link fs-5 text-white" aria-current="page"
                                 href="{% url 'student_signup' %}">Register as Student</a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link fs-4 text-white" aria-current="page"
+                            <a class="nav-link fs-5 text-white" aria-current="page"
                                 href="{% url 'instructor_signup' %}">Register as Instructor</a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link fs-4 text-white" aria-current="page" href="{% url 'login' %}">Login</a>
+                            <a class="nav-link fs-5 text-white" aria-current="page" href="{% url 'login' %}">Login</a>
                         </li>
 
                         {% if user.is_authenticated %}
                         {% if user.is_instructor %}
 
                         <li class="nav-item">
-                            <a class="nav-link fs-3 text-white" href="{% url 'course_create' %}">Create Course</a>
+                            <a class="nav-link fs-5 text-white" href="{% url 'course_create' %}">Create Course</a>
                         </li>
                         {% endif %}
 
                     </ul>
-                    <span class="nav-link">Welcome, {{ user.username }}</span>
+                    <span class="nav-link fs-5 text-white">Welcome, {{ user.username }}</span>
 
                     {% endif %}
                 </div>
@@ -103,7 +103,7 @@
         {% endblock %}
     </main>
 
-    <footer class="bg-primary text-white text-center align-middle w-full py-4">
+    <footer class="bg-primary text-white text-center align-middle py-4 bottom-0 w-100">
 
         <p>&copy;2024 Online Learning Platform</p>
 
