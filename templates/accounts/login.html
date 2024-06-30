@@ -2,11 +2,6 @@
 
 {% block content %}
   <h2>Log In</h2>
-  {% comment %} <form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Log In</button>
-  </form> {% endcomment %}
 
   <form class="my-3" method="post" action="{% url 'login' %}">
     {% csrf_token %}
@@ -17,8 +12,8 @@
     </div>
 
     <div class="mb-3">
-      <label for="password1" class="form-label">Password</label>
-      <input type="password" class="form-control" name="password1" id="password1" />
+      <label for="password" class="form-label">Password</label>
+      <input type="password" class="form-control" name="password" id="password1" />
     </div>
 
     <button type="submit" class="btn btn-primary">Submit</button>
