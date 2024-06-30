@@ -4,10 +4,9 @@ from django.urls import reverse_lazy
 from django.shortcuts import redirect, render
 from django.contrib import messages
 from django.http import HttpResponseRedirect
+
 from .forms import StudentSignUpForm, InstructorSignUpForm
 from .models import User
-
-# Custom Login View
 
 
 class CustomLoginView(LoginView):
@@ -17,15 +16,11 @@ class CustomLoginView(LoginView):
     def get_success_url(self):
         return self.success_url
 
-# Logout View
-
 
 def logout_view(request):
     logout(request)
     messages.success(request, 'You have been successfully logged out.')
     return redirect('course_list')
-
-# Student Sign Up View
 
 
 def student_signup(request):
@@ -38,8 +33,6 @@ def student_signup(request):
     else:
         form = StudentSignUpForm()
     return render(request, 'accounts/student_signup.html', {'form': form, 'user_type': 'student'})
-
-# Instructor Sign Up View
 
 
 def instructor_signup(request):
