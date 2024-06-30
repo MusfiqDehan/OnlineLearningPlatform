@@ -1,23 +1,36 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <h1>
-    {% if form.instance.pk %}
-      Edit Course
-    {% else %}
-      Create Course
-    {% endif %}
-  </h1>
-  <form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">
+  <div class="container mt-5">
+    <h1>
       {% if form.instance.pk %}
-        Update
+        Edit Course
       {% else %}
-        Create
-      {% endif %}Course
-    </button>
-  </form>
-  <a href="{% url 'course_list' %}">Back to Course List</a>
+        Create Course
+      {% endif %}
+    </h1>
+    <form method="post" action="{% url 'course_create' %}" enctype="multipart/form-data" class="my-3">
+      {% csrf_token %}
+      <div class="mb-3">
+        <label for="{{ form.title.id_for_label }}" class="form-label">Course Title</label>
+        {{ form.title }}
+      </div>
+      <div class="mb-3">
+        <label for="{{ form.description.id_for_label }}" class="form-label">Course Description</label>
+        {{ form.description }}
+      </div>
+      <div class="mb-3">
+        <label for="{{ form.thumbnail.id_for_label }}" class="form-label">Course Thumbnail</label>
+        {{ form.thumbnail }}
+      </div>
+      <button type="submit" class="btn btn-primary">
+        {% if form.instance.pk %}
+          Update
+        {% else %}
+          Create
+        {% endif %}Course
+      </button>
+    </form>
+    <a href="{% url 'course_list' %}" class="btn btn-secondary mt-3">Back to Course List</a>
+  </div>
 {% endblock %}

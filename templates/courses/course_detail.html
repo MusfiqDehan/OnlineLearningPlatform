@@ -10,28 +10,28 @@
 
   {% if user.is_authenticated %}
     {% if user == course.instructor %}
-      <a href="{% url 'course_update' course.pk %}">Edit Course</a>
-      <a href="{% url 'course_delete' course.pk %}">Delete Course</a>
+      <a class="btn btn-warning mr-2" href="{% url 'course_update' course.pk %}">Edit Course</a>
+      <a class="btn btn-danger mr-2" href="{% url 'course_delete' course.pk %}">Delete Course</a>
       {% if user == course.instructor %}
-        <a href="{% url 'lesson_create' course.pk %}">Add New Lesson</a>
+        <a class="btn btn-success ml-2" href="{% url 'lesson_create' course.pk %}">Add New Lesson</a>
       {% endif %}
     {% elif user in course.students.all %}
       {% if course.is_completed %}
         <p>You completed this course on {{ course.completed_at|date:'F d, Y, h:i:s A' }}</p>
       {% endif %}
     {% else %}
-      <a href="{% url 'enroll_course' course.pk %}">Enroll</a>
+      <a class="btn btn-lg btn-danger" href="{% url 'enroll_course' course.pk %}">Enroll</a>
     {% endif %}
   {% endif %}
 
-  <h2>Lessons</h2>
+  <h2 class="my-5">Lessons</h2>
   <ul>
     {% for lesson in course.lessons.all %}
       <li>
-        <a href="{% url 'lesson_detail' course.pk lesson.pk %}">{{ lesson.title }}</a>
+        <a class="fs-4" href="{% url 'lesson_detail' course.pk lesson.pk %}">{{ lesson.title }}</a>
         {% if user == course.instructor %}
-          <a href="{% url 'lesson_update' course.pk lesson.pk %}">Edit</a>
-          <a href="{% url 'lesson_delete' course.pk lesson.pk %}">Delete</a>
+          <a class="btn btn-warning mr-3" href="{% url 'lesson_update' course.pk lesson.pk %}">Edit</a>
+          <a class="btn btn-danger mr-3" href="{% url 'lesson_delete' course.pk lesson.pk %}">Delete</a>
         {% elif user in course.students.all %}
           {% for completed_lesson in completed_lessons %}
             {% if completed_lesson.lesson == lesson %}

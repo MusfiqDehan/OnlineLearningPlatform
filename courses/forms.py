@@ -7,13 +7,13 @@ class CourseForm(forms.ModelForm):
     class Meta:
         model = Course
         fields = ['title', 'description',
-                  'instructor', 'students', 'thumbnail']
+                  'thumbnail']
 
 
 class LessonForm(forms.ModelForm):
     class Meta:
         model = Lesson
-        fields = ['title', 'content', 'course', 'order', 'thumbnail']
+        fields = ['title', 'content', 'order', 'thumbnail']
 
     def __init__(self, *args, **kwargs):
         user = kwargs.pop('user', None)

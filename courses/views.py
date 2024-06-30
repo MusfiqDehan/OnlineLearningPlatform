@@ -5,14 +5,10 @@ from django.utils import timezone
 from .models import Course, Lesson, Progress
 from .forms import CourseForm, LessonForm
 
-# Course List View
-
 
 def course_list(request):
     courses = Course.objects.all()
     return render(request, 'courses/course_list.html', {'courses': courses})
-
-# Course Detail View
 
 
 def course_detail(request, pk):
@@ -26,15 +22,13 @@ def course_detail(request, pk):
         )
     return render(request, 'courses/course_detail.html', context)
 
-# Course Create View
-
 
 @login_required
 def course_create(request):
     if not request.user.is_instructor:
         raise PermissionDenied()
     if request.method == 'POST':
-        form = CourseForm(request.POST)
+        form = CourseForm(request.POST, request.FILES)
         if form.is_valid():
             course = form.save(commit=False)
             course.instructor = request.user
@@ -44,8 +38,6 @@ def course_create(request):
         form = CourseForm()
     return render(request, 'courses/course_form.html', {'form': form})
 
-# Course Update View
-
 
 @login_required
 def course_update(request, pk):
@@ -53,15 +45,13 @@ def course_update(request, pk):
     if request.user != course.instructor or not request.user.is_instructor:
         raise PermissionDenied()
     if request.method == 'POST':
-        form = CourseForm(request.POST, instance=course)
+        form = CourseForm(request.POST, request.FILES, instance=course)
         if form.is_valid():
             form.save()
             return redirect('course_list')
     else:
         form = CourseForm(instance=course)
     return render(request, 'courses/course_form.html', {'form': form})
-
-# Course Delete View
 
 
 @login_required
@@ -74,8 +64,6 @@ def course_delete(request, pk):
         return redirect('course_list')
     return render(request, 'courses/course_confirm_delete.html', {'course': course})
 
-# Enroll in Course
-
 
 @login_required
 def enroll_course(request, pk):
@@ -83,8 +71,6 @@ def enroll_course(request, pk):
     if request.user not in course.students.all():
         course.students.add(request.user)
     return redirect('course_detail', pk=pk)
-
-# Lesson List View
 
 
 @login_required
@@ -94,8 +80,6 @@ def lesson_list(request, course_pk):
         lessons = course.lessons.all()
         return render(request, 'lessons/lesson_list.html', {'course': course, 'lessons': lessons})
     return redirect('course_list')
-
-# Lesson Create View
 
 
 @login_required
@@ -115,8 +99,6 @@ def lesson_create(request, course_pk):
         form = LessonForm()
     return render(request, 'lessons/lesson_form.html', {'form': form, 'course': course})
 
-# Lesson Update View
-
 
 @login_required
 def lesson_update(request, course_pk, pk):
@@ -125,7 +107,7 @@ def lesson_update(request, course_pk, pk):
     if request.user != course.instructor:
         raise PermissionDenied()
     if request.method == 'POST':
-        form = LessonForm(request.POST, instance=lesson)
+        form = LessonForm(request.POST, request.FILES, instance=lesson)
         if form.is_valid():
             form.save()
             return redirect('course_detail', pk=course_pk)

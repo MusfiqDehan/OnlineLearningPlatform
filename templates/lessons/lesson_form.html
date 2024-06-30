@@ -1,23 +1,40 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <h1>
-    {% if form.instance.pk %}
-      Edit Lesson
-    {% else %}
-      Create Lesson
-    {% endif %}
-  </h1>
-  <form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">
+  <div class="container mt-5">
+    <h1>
       {% if form.instance.pk %}
-        Update
+        Edit Lesson
       {% else %}
-        Create
-      {% endif %}Lesson
-    </button>
-  </form>
-  <a href="{% url 'course_detail' course.pk %}">Back to Course</a>
+        Create Lesson
+      {% endif %}
+    </h1>
+    <form method="post" enctype="multipart/form-data" class="my-3">
+      {% csrf_token %}
+      <div class="mb-3">
+        <label for="{{ form.title.id_for_label }}" class="form-label">Lesson Title</label>
+        {{ form.title }}
+      </div>
+      <div class="mb-3">
+        <label for="{{ form.content.id_for_label }}" class="form-label">Lesson Content</label>
+        {{ form.content }}
+      </div>
+      <div class="mb-3">
+        <label for="{{ form.order.id_for_label }}" class="form-label">Order</label>
+        {{ form.order }}
+      </div>
+      <div class="mb-3">
+        <label for="{{ form.thumbnail.id_for_label }}" class="form-label">Lesson Thumbnail</label>
+        {{ form.thumbnail }}
+      </div>
+      <button type="submit" class="btn btn-primary">
+        {% if form.instance.pk %}
+          Update
+        {% else %}
+          Create
+        {% endif %}Lesson
+      </button>
+    </form>
+    <a href="{% url 'course_detail' course.pk %}" class="btn btn-secondary mt-3">Back to Course</a>
+  </div>
 {% endblock %}

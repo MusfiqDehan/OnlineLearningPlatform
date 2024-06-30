@@ -50,6 +50,18 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        {% if user.is_authenticated %}
+                            {% if user.is_instructor %}
+
+                            <li class="nav-item">
+                                <a class="nav-link fs-5 text-white" href="{% url 'course_create' %}">Create Course</a>
+                            </li>
+                            {% endif %}
+                        <li class="nav-item">
+                            <a class="nav-link fs-5 text-white" href="{% url 'logout' %}">LogOut</a>
+                        </li>
+                        {% else %}
+
                         <li class="nav-item">
                             <a class="nav-link fs-5 text-white" aria-current="page"
                                 href="{% url 'course_list' %}">Courses</a>
@@ -69,17 +81,11 @@
                             <a class="nav-link fs-5 text-white" aria-current="page" href="{% url 'login' %}">Login</a>
                         </li>
 
-                        {% if user.is_authenticated %}
-                        {% if user.is_instructor %}
-
-                        <li class="nav-item">
-                            <a class="nav-link fs-5 text-white" href="{% url 'course_create' %}">Create Course</a>
-                        </li>
                         {% endif %}
-
                     </ul>
-                    <span class="nav-link fs-5 text-white">Welcome, {{ user.username }}</span>
 
+                    {% if user.is_authenticated %}
+                    <span class="nav-link fs-5 text-white">Welcome, {{ user.username }}</span>
                     {% endif %}
                 </div>
             </div>
@@ -91,7 +97,7 @@
 
     <main class="container">
         {% if messages %}
-        <ul class="messages">
+        <ul class="messages z-3">
             {% for message in messages %}
             <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
                 {% endfor %}

@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <h1>{{ lesson.title }}</h1>
+  <h1 class="my-3">{{ lesson.title }}</h1>
   {% if lesson.thumbnail %}
     <img src="{{ lesson.thumbnail.url }}" alt="{{ lesson.title }} thumbnail" />
   {% endif %}
@@ -13,7 +13,7 @@
     {% else %}
       <form method="post" action="{% url 'mark_lesson_complete' lesson.course.pk lesson.pk %}">
         {% csrf_token %}
-        <button type="submit">Mark as Completed</button>
+        <button class="btn btn-primary" type="submit">Mark as Completed</button>
       </form>
     {% endif %}
 
