@@ -89,7 +89,7 @@ def lesson_create(request, course_pk):
         raise PermissionDenied(
             "You don't have permission to add lessons to this course.")
     if request.method == 'POST':
-        form = LessonForm(request.POST)
+        form = LessonForm(request.POST, request.FILES)
         if form.is_valid():
             lesson = form.save(commit=False)
             lesson.course = course
@@ -115,8 +115,6 @@ def lesson_update(request, course_pk, pk):
         form = LessonForm(instance=lesson)
     return render(request, 'lessons/lesson_form.html', {'form': form, 'course': course})
 
-# Lesson Delete View
-
 
 @login_required
 def lesson_delete(request, course_pk, pk):
@@ -128,8 +126,6 @@ def lesson_delete(request, course_pk, pk):
         lesson.delete()
         return redirect('course_detail', pk=course_pk)
     return render(request, 'lessons/lesson_confirm_delete.html', {'lesson': lesson})
-
-# Lesson Detail View
 
 
 @login_required
@@ -149,8 +145,6 @@ def lesson_detail(request, course_pk, lesson_pk):
             'course_completed_at': course_completed_at
         })
     return redirect('course_list')
-
-# Mark Lesson Complete
 
 
 @login_required
