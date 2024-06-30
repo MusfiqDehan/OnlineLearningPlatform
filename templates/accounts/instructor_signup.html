@@ -2,10 +2,31 @@
 
 {% block content %}
   <h2>Sign Up as an Instructor</h2>
-  <form method="post">
+
+  <form class="my-3" method="post" action="{% url 'instructor_signup' %}">
     {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Sign Up</button>
+
+    <div class="mb-3">
+      <label for="username" class="form-label">Username</label>
+      <input type="text" class="form-control" name="username" id="username" aria-describedby="username" />
+    </div>
+
+    <div class="mb-3">
+      <label for="email" class="form-label">Email</label>
+      <input type="email" class="form-control" name="email" id="email" aria-describedby="email" />
+    </div>
+
+    <div class="mb-3">
+      <label for="password1" class="form-label">Password</label>
+      <input type="password" class="form-control" name="password1" id="password1" />
+    </div>
+
+    <div class="mb-3">
+      <label for="password2" class="form-label">Confirm Password</label>
+      <input type="password" class="form-control" name="password2" id="password2" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
   </form>
   <p>
     Already have an account? <a href="{% url 'login' %}">Log in</a>
