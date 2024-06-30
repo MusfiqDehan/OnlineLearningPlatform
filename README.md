@@ -185,7 +185,3 @@ python manage.py runserver
 ```
 
 Visit `http://127.0.0.1:8000/` in your web browser to see the application in action.
-
----
-
-This documentation provides an overview of the key components of the application and instructions on setting it up and running it. Adjust the details according to your specific application requirements and customizations.
