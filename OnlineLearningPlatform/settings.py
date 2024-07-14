@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-sm7^disjiojk(7(%z2_p7l*^q_(jf7-9=6*&))(^nb1k4z!7#-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -38,14 +38,13 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'courses',
-    'accounts'
+    'accounts',
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
 ]
-
-AUTH_USER_MODEL = 'accounts.User'
-
-LOGIN_URL = 'login'
-LOGIN_REDIRECT_URL = 'course_list'
-LOGOUT_REDIRECT_URL = 'course_list'
 
 
 MIDDLEWARE = [
@@ -56,6 +55,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'allauth.account.middleware.AccountMiddleware',
 ]
 
 ROOT_URLCONF = 'OnlineLearningPlatform.urls'
@@ -119,6 +119,66 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 
 USE_TZ = True
+
+
+# New User Settings for Allauth
+AUTH_USER_MODEL = 'accounts.User'
+
+LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = 'course_list'
+LOGOUT_REDIRECT_URL = 'course_list'
+
+SITE_ID = 2
+
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+)
+
+
+# Add any other allauth settings you need
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_UNIQUE_EMAIL = True
+ACCOUNT_USERNAME_REQUIRED = True
+ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+SOCIALACCOUNT_QUERY_EMAIL = True
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        'SCOPE': [
+            'profile',
+            'email',
+        ],
+        'AUTH_PARAMS': {
+            'access_type': 'online',
+        }
+    }
+}
+
+
+# Add the custom social account adapter
+# SOCIALACCOUNT_ADAPTER = 'accounts.views.CustomSocialAccountAdapter'
+SOCIALACCOUNT_ADAPTER = 'accounts.adapters.CustomSocialAccountAdapter'
+ACCOUNT_ADAPTER = 'allauth.account.adapter.DefaultAccountAdapter'
+
+# Ensure automatic login after successful authentication
+SOCIALACCOUNT_LOGIN_ON_GET = True
+
+
+# Configure logging
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'root': {
+        'handlers': ['console'],
+        'level': 'INFO',
+    },
+}
 
 
 # Static files (CSS, JavaScript, Images)

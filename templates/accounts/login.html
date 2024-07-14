@@ -13,13 +13,15 @@
 
     <div class="mb-3">
       <label for="password" class="form-label">Password</label>
-      <input type="password" class="form-control" name="password" id="password1" />
+      <input type="password" class="form-control" name="password" id="password" />
     </div>
 
     <button type="submit" class="btn btn-primary">Submit</button>
   </form>
+  <p>Or log in with:</p>
+  <a href="{% url 'student_google_login' %}" class="btn btn-danger">Google (Student)</a>
+  <a href="{% url 'instructor_google_login' %}" class="btn btn-danger">Google (Instructor)</a>
   <p>Don't have an account?</p>
-
   <p>
     <a class="text-decoration-none" href="{% url 'student_signup' %}">Sign up as a Student</a>
   </p>
