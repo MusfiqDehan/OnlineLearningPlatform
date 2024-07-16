@@ -33,6 +33,8 @@ def student_signup(request):
         form = StudentSignUpForm(request.POST)
         if form.is_valid():
             user = form.save()
+            # Explicitly specify the authentication backend
+            user.backend = 'django.contrib.auth.backends.ModelBackend'
             login(request, user)
             return redirect('course_list')
     else:
@@ -45,6 +47,8 @@ def instructor_signup(request):
         form = InstructorSignUpForm(request.POST)
         if form.is_valid():
             user = form.save()
+            # Explicitly specify the authentication backend
+            user.backend = 'django.contrib.auth.backends.ModelBackend'
             login(request, user)
             return redirect('course_list')
     else:
