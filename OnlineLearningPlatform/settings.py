@@ -19,8 +19,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 
 ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', default="*").split(',')
 
-CSRF_TRUSTED_ORIGINS = os.getenv(
-    'CSRF_TRUSTED_ORIGINS', default="*").split(',')
+CSRF_TRUSTED_ORIGINS = ['https://mrd-online-learning-platform.up.railway.app']
 
 
 DEBUG = os.getenv('DEBUG', default=True)
