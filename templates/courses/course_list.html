@@ -1,54 +1,43 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
-<style>
-  #courses {
-    text-align: center;
-  }
-</style>
-<!-- Hero Section -->
-<section id="hero" class="text-black text-center py-3">
-  <div class="py-3">
-    <h1 class="display-4">
-      Unified Online Learning Management Platform
-    </h1>
-    <p class="lead">
-      Enhance your skills and knowledge with the best courses and instructors available online. Join us
-      today and start your journey towards excellence.
-    </p>
-    <p class="lead">
-      Whether you're a student eager to learn or an instructor ready to teach, we have the right tools for
-      you.
-    </p>
-    <a href="{% url 'student_signup' %}" class="btn btn-primary btn-lg mx-2">Register as a Student</a>
-    <a href="{% url 'instructor_signup' %}" class="btn btn-secondary btn-lg mx-2">Register as an Instructor</a>
-  </div>
-</section>
-
-<!-- Courses Section -->
-<section id="courses" class="py-5">
-
-  <h1 class="mb-4">Our Courses</h1>
-  <div class="row">
-    {% for course in courses %}
-    <div class="col-md-3 mb-4">
-      <div class="card h-100">
-        {% if course.thumbnail %}
-        <img src="{{ course.thumbnail.url }}" class="card-img-top" alt="{{ course.title }}" />
-        {% endif %}
-        <div class="card-body">
-          <h5 class="card-title"><a href="{% url 'course_detail' course.pk %}">{{ course.title }}</a></h5>
-          <p class="card-text">{{ course.description }}</p>
-          <p class="card-text">
-            <small class="text-muted">Instructor: {{ course.instructor.username }}</small>
-          </p>
-          <a href="{% url 'course_detail' course.pk %}" class="btn btn-primary">View Course</a>
-        </div>
-      </div>
+  <style>
+    #courses {
+      text-align: center;
+    }
+  </style>
+  <!-- Hero Section -->
+  <section id="hero" class="text-black text-center py-3">
+    <div class="py-3">
+      <h1 class="display-4">Unified Online Learning Management Platform</h1>
+      <p class="lead">Enhance your skills and knowledge with the best courses and instructors available online. Join us today and start your journey towards excellence.</p>
+      <p class="lead">Whether you're a student eager to learn or an instructor ready to teach, we have the right tools for you.</p>
+      <a href="{% url 'student_signup' %}" class="btn btn-primary btn-lg mx-2">Register as a Student</a>
+      <a href="{% url 'instructor_signup' %}" class="btn btn-secondary btn-lg mx-2">Register as an Instructor</a>
     </div>
-    {% endfor %}
-  </div>
-</section>
+  </section>
 
+  <!-- Courses Section -->
+  <section id="courses" class="py-5">
+    <h1 class="mb-4">Our Courses</h1>
+    <div class="row">
+      {% for course in courses %}
+        <div class="col-md-3 mb-4">
+          <div class="card h-100">
+            {% if course.thumbnail %}
+              <img src="{{ course.thumbnail.url }}" class="card-img-top" alt="{{ course.title }}" />
+            {% endif %}
+            <div class="card-body">
+              <h5 class="card-title"><a href="{% url 'course_detail' course.pk %}">{{ course.title }}</a></h5>
+              <p class="card-text text-truncate">{{ course.description }}</p>
+              <p class="card-text">
+                <small class="text-muted">Instructor: {{ course.instructor.username }}</small>
+              </p>
+              <a href="{% url 'course_detail' course.pk %}" class="btn btn-primary">View Course</a>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </section>
 {% endblock %}

@@ -58,7 +58,7 @@ class Lesson(models.Model):
         return f"{self.course.title} - {self.title}"
 
     def delete(self, *args, **kwargs):
-        # Delete the image file when the course is deleted
+        # Delete the image file when the lesson is deleted
         if self.thumbnail:
             default_storage.delete(self.thumbnail.path)
         super().delete(*args, **kwargs)
