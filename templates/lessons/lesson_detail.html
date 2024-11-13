@@ -13,7 +13,7 @@
     {% else %}
       <form method="post" action="{% url 'mark_lesson_complete' lesson.course.pk lesson.pk %}">
         {% csrf_token %}
-        <button class="btn btn-primary" type="submit">Mark as Completed</button>
+        <button class="btn btn-success my-3" type="submit">Mark as Completed</button>
       </form>
     {% endif %}
 

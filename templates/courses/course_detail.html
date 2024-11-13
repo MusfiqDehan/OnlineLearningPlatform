@@ -20,7 +20,7 @@
         <p>You completed this course on {{ course.completed_at|date:'F d, Y, h:i:s A' }}</p>
       {% endif %}
     {% else %}
-      <a class="btn btn-lg btn-danger" href="{% url 'enroll_course' course.pk %}">Enroll</a>
+      <a class="btn btn-lg btn-success" href="{% url 'enroll_course' course.pk %}">Enroll</a>
     {% endif %}
   {% endif %}
 

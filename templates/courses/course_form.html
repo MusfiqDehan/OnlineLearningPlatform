@@ -9,7 +9,7 @@
         Create Course
       {% endif %}
     </h1>
-    <form method="post" action="{% url 'course_create' %}" enctype="multipart/form-data" class="my-3">
+    <form method="post" enctype="multipart/form-data" class="my-3">
       {% csrf_token %}
       <div class="mb-3">
         <label for="{{ form.title.id_for_label }}" class="form-label">Course Title</label>

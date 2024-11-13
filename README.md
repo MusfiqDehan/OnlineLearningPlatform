@@ -33,10 +33,16 @@ This Django application provides functionality for managing courses, lessons, an
 
 ### Setup and Installation
 
-#### Prerequisites
-- Python 3.x
-- Django 3.x or higher
-- A virtual environment tool (optional but recommended)
+#### Technology Used
+
+-   **Frontend:** HTML5, CSS3, Bootstrap5
+-   **Backend:** Python=3.12.3, Django=5.0.6
+-   **Database:** SQLite3
+-   **Version Control:** Git, GitHub
+-   **Editor:** VS Code
+-   **Operating System:** Ubuntu 24.04 LTS
+-   **Browser(Tested On):** Google Chrome, Microsoft Edge, Mozilla Firefox
+
 
 #### Installation Steps
 1. **Clone the repository:**

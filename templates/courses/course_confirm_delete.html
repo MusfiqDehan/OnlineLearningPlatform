@@ -5,7 +5,7 @@
   <p>Are you sure you want to delete the course "{{ course.title }}"?</p>
   <form method="post">
     {% csrf_token %}
-    <button type="submit">Confirm Delete</button>
+    <button class="btn btn-danger" type="submit">Confirm Delete</button>
   </form>
-  <a href="{% url 'course_detail' course.pk %}">Cancel</a>
+  <a class="btn btn-secondary" href="{% url 'course_detail' course.pk %}">Cancel</a>
 {% endblock %}
